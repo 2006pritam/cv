@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>CV</title>
+
+    <!--
+      CV styles live here, scoped to .cv-paper and fully self-contained.
+      Keeping them inline lets the PNG/JPG export inline the exact same CSS.
+    -->
+    <style id="cvStyle">
+      .cv-paper{width:794px;min-height:1123px;box-sizing:border-box;background:#ffffff;color:#222222;font-family:Arial,Helvetica,"Segoe UI",sans-serif;font-size:12.5px;line-height:1.55;padding:54px 62px;}
+      .cv-paper *{box-sizing:border-box;margin:0;padding:0;}
+      .cv-paper .cv-head{text-align:center;position:relative;min-height:116px;padding:0 112px;}
+      .cv-paper .cv-photo{position:absolute;top:0;right:0;width:82px;height:104px;border:1px solid #cfcfcf;background:#f8f8f6;color:#999;display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:1px;overflow:hidden;}
+      .cv-paper .cv-photo img{width:100%;height:100%;object-fit:cover;}
+      .cv-paper .cv-photo.has-photo{border-color:#aaa;}
+      .cv-paper.page-border{border:1px solid #000000;}
+      .cv-paper .cv-name{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.15;font-weight:700;letter-spacing:.2px;color:#111111;}
+      .cv-paper .cv-contact{margin-top:10px;font-size:12px;color:#333333;line-height:1.7;}
+      .cv-paper .cv-sep{color:#bbbbbb;padding:0 7px;}
+      .cv-paper .cv-sec{margin-top:22px;}
+      .cv-paper .cv-sec h2{font-family:Georgia,"Times New Roman",serif;font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#111111;padding-bottom:6px;border-bottom:1px solid #dddddd;}
+      .cv-paper .cv-sec h2 + *{margin-top:10px;}
+      .cv-paper .cv-p{color:#333333;}
+      .cv-paper .cv-item + .cv-item{margin-top:13px;}
+      .cv-paper .cv-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;}
+      .cv-paper .cv-role{font-weight:700;color:#111111;}
+      .cv-paper .cv-date{font-size:11.5px;color:#666666;white-space:nowrap;}
+      .cv-paper .cv-sub{font-style:italic;color:#444444;margin-top:1px;}
+      .cv-paper .cv-desc{margin-top:3px;color:#333333;}
+      .cv-paper .cv-line{margin-top:7px;color:#333333;}
+      .cv-paper .cv-line strong{color:#111111;}
+    </style>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">CV <small>ATS-friendly, minimalist resume</small></div>
+      <div class="spacer"></div>
+      <span class="save-status" id="saveStatus">Saved</span>
+      <button class="btn btn-ghost" id="editBtn">Edit details</button>
+      <div class="dl">
+        <button class="btn btn-primary" id="downloadBtn" aria-haspopup="true" aria-expanded="false">
+          Download <span class="caret">▾</span>
+        </button>
+        <div class="dl-menu" id="downloadMenu" role="menu">
+          <button data-format="pdf" role="menuitem">
+            <strong>PDF</strong><span>Text-based, best for job applications and ATS</span>
+          </button>
+          <button data-format="png" role="menuitem">
+            <strong>PNG</strong><span>Sharp image for email or LinkedIn</span>
+          </button>
+          <button data-format="jpg" role="menuitem">
+            <strong>JPG</strong><span>Smaller image file</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="paper-wrap" id="paperWrap">
+        <article class="cv-paper" id="cvPaper">
+          <header class="cv-head">
+            <h1 class="cv-name" id="cvName"></h1>
+            <p class="cv-contact" id="cvContact"></p>
+            <div class="cv-photo" id="cvPhoto" aria-label="Profile photo placeholder"><span>PHOTO</span></div>
+          </header>
+          <section class="cv-sec" id="secSummary"><h2>Summary</h2><div id="cvObjective"></div></section>
+          <section class="cv-sec" id="secExperience"><h2>Experience</h2><div id="cvExperience"></div></section>
+          <section class="cv-sec" id="secEducation"><h2>Education</h2><div id="cvEducation"></div></section>
+          <section class="cv-sec" id="secSkills"><h2>Skills</h2><div id="cvSkills"></div></section>
+          <section class="cv-sec" id="secProjects"><h2>Projects</h2><div id="cvProjects"></div></section>
+          <section class="cv-sec" id="secCerts"><h2>Certifications</h2><div id="cvCertifications"></div></section>
+          <section class="cv-sec" id="secPersonal"><h2>Personal Details</h2><div id="cvPersonal"></div></section>
+        </article>
+      </div>
+    </main>
+
+    <div class="zoombar">
+      <button id="zoomOut" title="Zoom out" aria-label="Zoom out">−</button>
+      <span id="zoomValue">100%</span>
+      <button id="zoomIn" title="Zoom in" aria-label="Zoom in">+</button>
+    </div>
+
+    <div class="backdrop" id="backdrop"></div>
+    <aside class="edit-panel" id="editPanel" aria-hidden="true" aria-label="Edit CV details">
+      <div class="edit-head">
+        <div>
+          <h2>Edit details</h2>
+          <p>Type in any field. The CV updates live and saves on this device.</p>
+        </div>
+        <button class="icon-btn" id="closeEdit" aria-label="Close editor">×</button>
+      </div>
+      <div class="edit-body" id="editForm"></div>
+      <div class="edit-foot">
+        <button class="btn btn-ghost" id="resetBtn">Reset to original details</button>
+      </div>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>
